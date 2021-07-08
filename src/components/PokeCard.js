@@ -5,21 +5,51 @@ import axios from 'axios';
 
 function PokeCard({ url }) {
   const [pokemon, setPokemon] = useState({});
+  const [status, setStatus] = useState('init');
 
   useEffect(() => {
-    axios.get(url).then(res => {
-      setPokemon(res.data);
-    });
+    setStatus('pending');
+    axios
+      .get(url)
+      .then(res => {
+        setPokemon(res.data);
+        setStatus('resolved');
+      })
+      .catch(error => {
+        console.log(error);
+        setStatus('rejected')
+      });
   }, [url]);
 
+  if (status !== 'resolved') {
+    return (
+      <Box
+        m="15"
+        borderWidth="1px"
+        borderRadius="lg"
+        overflow="hidden"
+        height="200px"
+        bg="#CBD5E0"
+        textAlign="center"
+      />
+    );
+  }
+
   return (
-    <Box m="15" borderWidth="1px" borderRadius="lg" overflow="hidden" height="200px" bg='#CBD5E0' textAlign="center"> 
-      {/* bgGradient="linear(to-r, green.200, pink.500)"   */}
+    <Box
+      m="15"
+      borderWidth="1px"
+      borderRadius="lg"
+      overflow="hidden"
+      height="200px"
+      bg="#CBD5E0"
+      textAlign="center"
+    >
       <Text fontSize="2xl">
-        {pokemon.name ?  pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1) : null}
+        {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
       </Text>
       <Center>
-        <Image src={pokemon.sprites ? pokemon.sprites.front_default : null} />
+        <Image src={pokemon.sprites.front_default} />
       </Center>
     </Box>
   );
