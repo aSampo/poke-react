@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Text, Image, Center } from '@chakra-ui/react';
+import { Box, Text, Image, Center, Flex } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
@@ -29,7 +29,6 @@ function PokeCard({ url }) {
         borderRadius="lg"
         overflow="hidden"
         height="200px"
-        bg="#CBD5E0"
         textAlign="center"
       />
     );
@@ -42,15 +41,17 @@ function PokeCard({ url }) {
       borderRadius="lg"
       overflow="hidden"
       height="200px"
-      bg="#CBD5E0"
       textAlign="center"
     >
-      <Text fontSize="2xl">
-        {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
-      </Text>
       <Center>
         <Image src={pokemon.sprites.front_default} />
       </Center>
+      <Text fontSize="2xl">
+        {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
+      </Text>
+      {pokemon.types.map( type => <Text key={type.type.name}>{type.type.name}</Text>)}
+      
+      
     </Box>
   );
 }

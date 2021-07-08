@@ -6,7 +6,7 @@ export const Header = () => {
     <Grid gap={1}>
       <ColorModeSwitcher justifySelf="flex-end" />
       <Heading m="auto" size="lg">
-        Pokedex 💛
+        Pokedex
       </Heading>
     </Grid>
   );
