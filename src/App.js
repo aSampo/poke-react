@@ -1,18 +1,16 @@
-import * as React from "react";
-import { theme, ChakraProvider } from "@chakra-ui/react";
-import { Header } from "./components/Header";
-import { PokeGrid } from "./components/PokeGrid";
-import {useEffect, useState} from 'react';
-import axios from "axios";
+import * as React from 'react';
+import { theme, ChakraProvider } from '@chakra-ui/react';
+import { Header } from './components/Header';
+import { PokeGrid } from './components/PokeGrid';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
-function App () {
+function App() {
   const [pokemons, setpokemons] = useState([]);
-
-
 
   useEffect(() => {
     axios
-      .get(`https://pokeapi.co/api/v2/pokemon?limit=20&offset=10`)
+      .get(`https://pokeapi.co/api/v2/pokemon?limit=21&offset=0`)
       .then((res) => {
         setpokemons(res.data.results);
       })
@@ -24,6 +22,6 @@ function App () {
       <PokeGrid pokemons={pokemons} />
     </ChakraProvider>
   );
-};
+}
 
-export default App
+export default App;
