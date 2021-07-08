@@ -1,42 +1,29 @@
-import React from 'react';
-import {
-  ChakraProvider,
-  Box,
-  Text,
-  Link,
-  VStack,
-  Code,
-  Grid,
-  theme,
-} from '@chakra-ui/react';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
-import { Logo } from './Logo';
+import * as React from "react";
+import { theme, ChakraProvider } from "@chakra-ui/react";
+import { Header } from "./components/Header";
+import { PokeGrid } from "./components/PokeGrid";
+import {useEffect, useState} from 'react';
+import axios from "axios";
 
-function App() {
+function App () {
+  const [pokemons, setpokemons] = useState([]);
+
+
+
+  useEffect(() => {
+    axios
+      .get(`https://pokeapi.co/api/v2/pokemon?limit=20&offset=10`)
+      .then((res) => {
+        setpokemons(res.data.results);
+      })
+  }, []);
+
   return (
     <ChakraProvider theme={theme}>
-      <Box textAlign="center" fontSize="xl">
-        <Grid minH="100vh" p={3}>
-          <ColorModeSwitcher justifySelf="flex-end" />
-          <VStack spacing={8}>
-            <Logo h="40vmin" pointerEvents="none" />
-            <Text>
-              Edit <Code fontSize="xl">src/App.js</Code> and save to reload.
-            </Text>
-            <Link
-              color="teal.500"
-              href="https://chakra-ui.com"
-              fontSize="2xl"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn Chakra
-            </Link>
-          </VStack>
-        </Grid>
-      </Box>
+      <Header />
+      <PokeGrid pokemons={pokemons} />
     </ChakraProvider>
   );
-}
+};
 
-export default App;
+export default App
