@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { theme, ChakraProvider } from '@chakra-ui/react';
+import { theme, ChakraProvider, Box } from '@chakra-ui/react';
 import { Header } from './components/Header';
 import { PokeGrid } from './components/PokeGrid';
 import { useEffect, useState } from 'react';
@@ -11,15 +11,21 @@ function App() {
   useEffect(() => {
     axios
       .get(`https://pokeapi.co/api/v2/pokemon?limit=21&offset=0`)
-      .then((res) => {
+      .then(res => {
         setpokemons(res.data.results);
-      })
+      });
   }, []);
 
   return (
     <ChakraProvider theme={theme}>
-      <Header />
-      <PokeGrid pokemons={pokemons} />
+      <Box
+        backgroundImage="url('/images/kyuubi.png')"
+        backgroundPosition="center"
+        backgroundRepeat="no-repeat"
+      >
+        <Header />
+        <PokeGrid pokemons={pokemons} />
+      </Box>
     </ChakraProvider>
   );
 }

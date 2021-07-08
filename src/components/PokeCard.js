@@ -13,7 +13,8 @@ function PokeCard({ url }) {
   }, [url]);
 
   return (
-    <Box m="15" borderRadius="6" height="200px" bg="grey" textAlign="center">
+    <Box m="15" borderWidth="1px" borderRadius="lg" overflow="hidden" height="200px" bg='#CBD5E0' textAlign="center"> 
+      {/* bgGradient="linear(to-r, green.200, pink.500)"   */}
       <Text fontSize="2xl">
         {pokemon.name ?  pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1) : null}
       </Text>
