@@ -7,7 +7,7 @@ export const PokeGrid = ({ pokemons }) => {
   return (
     <SimpleGrid columns={6} minChildWidth="220px" spacing={10}>
       {pokemons.map(pokemon => {
-        return <PokeCard key={pokemon.name} url={pokemon.url} />;
+        return <PokeCard key={pokemon.id} pokemon={pokemon} />;
       })}
     </SimpleGrid>
   );
