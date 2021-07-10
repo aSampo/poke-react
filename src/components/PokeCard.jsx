@@ -5,11 +5,14 @@ function PokeCard({ pokemon }) {
 
   return (
     <Box
-      m="15"
+      m="auto"
       borderWidth="1px"
       borderRadius="lg"
       overflow="hidden"
-      height="200px"
+      minH="200px"
+      maxH="200px"
+      minW="200px"
+      maxW="200px"
       textAlign="center"
     >
       <Center>
@@ -18,9 +21,9 @@ function PokeCard({ pokemon }) {
       <Text fontSize="2xl">
         {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
       </Text>
-      {pokemon.types.map(type => (
+      {/* {pokemon.types.map(type => (
         <Text key={type.type.name}>{type.type.name}</Text>
-      ))}
+      ))} */}
     </Box>
   );
 }
